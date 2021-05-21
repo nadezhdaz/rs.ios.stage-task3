@@ -19,28 +19,26 @@
     [string1 getCharacters:bufferShort range:NSMakeRange(0, string1Length)];
     [string2 getCharacters:bufferLong range:NSMakeRange(0, string2Length)];
     
-    NSMutableString *processingResult = [NSMutableString string];
+    NSMutableString *result = [NSMutableString string];
     NSInteger i = 0, j = 0;
     
     while (i < shortestString.length) {
         if (bufferShort[i] <= bufferLong[j]) {
-            [processingResult appendFormat:@"%c", bufferShort[i]];
+            [result appendFormat:@"%c", bufferShort[i]];
             i++;
         } else {
-            [processingResult appendFormat:@"%c", bufferLong[j]];
+            [result appendFormat:@"%c", bufferLong[j]];
             j++;
         }
         
         
     }
     
-    if (processingResult.length < (string1Length + string2Length)) {
-        [processingResult appendString:[longestString substringFromIndex:j]];
-    }
-    
-    NSString *result = [NSString stringWithString:processingResult];
+    if (result.length < (string1Length + string2Length)) {
+        [result appendString:[longestString substringFromIndex:j]];
+    }    
         
-    return result;
+    return [result copy];
 }
 
 @end
