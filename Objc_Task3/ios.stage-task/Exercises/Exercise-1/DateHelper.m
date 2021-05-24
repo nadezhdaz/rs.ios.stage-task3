@@ -58,8 +58,15 @@
 
 - (BOOL)isDateInThisWeek:(NSDate *)date {
     NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+    NSLocale *locale = [[NSLocale alloc] initWithLocaleIdentifier:@"ru"];
+    [gregorian setLocale:locale];
     NSDateComponents *inputDateComponents = [gregorian components:NSCalendarUnitWeekOfYear fromDate:date];
     NSDateComponents *todayDateComponents = [gregorian components:NSCalendarUnitWeekOfYear fromDate:[NSDate date]];
+    
+    
+    if ([inputDateComponents year] != [todayDateComponents year]) {
+        return NO;
+    }
     
     NSInteger inputWeek = [inputDateComponents weekOfYear];
     NSInteger todayWeek = [todayDateComponents weekOfYear];
